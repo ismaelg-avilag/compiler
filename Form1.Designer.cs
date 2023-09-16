@@ -32,8 +32,10 @@
             label1 = new Label();
             textBoxInput = new TextBox();
             textBoxOutput = new TextBox();
-            dataGridView = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            listView1 = new ListView();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader1 = new ColumnHeader();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -78,19 +80,38 @@
             textBoxOutput.Location = new Point(920, 57);
             textBoxOutput.Multiline = true;
             textBoxOutput.Name = "textBoxOutput";
+            textBoxOutput.PlaceholderText = "Análisis Sintáctico";
             textBoxOutput.ReadOnly = true;
             textBoxOutput.Size = new Size(350, 350);
             textBoxOutput.TabIndex = 3;
             // 
-            // dataGridView
+            // listView1
             // 
-            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(12, 447);
-            dataGridView.Name = "dataGridView";
-            dataGridView.RowHeadersWidth = 51;
-            dataGridView.RowTemplate.Height = 29;
-            dataGridView.Size = new Size(1258, 394);
-            dataGridView.TabIndex = 4;
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader3, columnHeader1 });
+            listView1.Location = new Point(11, 458);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(1260, 383);
+            listView1.TabIndex = 4;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.DisplayIndex = 1;
+            columnHeader2.Text = "Token";
+            columnHeader2.Width = 240;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.DisplayIndex = 2;
+            columnHeader3.Text = "Tipo";
+            columnHeader3.Width = 420;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.DisplayIndex = 0;
+            columnHeader1.Text = "Lexema";
+            columnHeader1.Width = 420;
             // 
             // Form1
             // 
@@ -98,14 +119,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 29, 49);
             ClientSize = new Size(1282, 853);
-            Controls.Add(dataGridView);
+            Controls.Add(listView1);
             Controls.Add(textBoxOutput);
             Controls.Add(textBoxInput);
             Controls.Add(label1);
             Controls.Add(buttonLexicalAnalyzer);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,6 +137,9 @@
         private Label label1;
         private TextBox textBoxInput;
         private TextBox textBoxOutput;
-        private DataGridView dataGridView;
+        private ListView listView1;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
     }
 }
