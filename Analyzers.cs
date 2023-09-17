@@ -33,7 +33,7 @@ namespace compiler
         }
 
 
-        public static Element lexicalAnalyze(string s)
+        public static LexicalElement lexicalAnalyze(string s)
         {
             int state = 0;
             string lexeme = "", token = "";
@@ -165,7 +165,7 @@ namespace compiler
                             token = Grammar.Identifier.ToString();
 
                             if (i == s.Length -1)
-                                return new Element(lexeme, token, (int)Grammar.Identifier);
+                                return new LexicalElement(lexeme, token, (int)Grammar.Identifier);
                         }
                     break;
 
@@ -181,7 +181,7 @@ namespace compiler
                             token = Grammar.Number.ToString();
                         }
                         else
-                            return new Element(lexeme, token, (int)Grammar.Number);
+                            return new LexicalElement(lexeme, token, (int)Grammar.Number);
                     break;
 
                     case 3:
@@ -191,71 +191,71 @@ namespace compiler
                             token = Grammar.Number.ToString();
 
                             if (i == s.Length -1)
-                                return new Element(lexeme, token, (int)Grammar.Number);
+                                return new LexicalElement(lexeme, token, (int)Grammar.Number);
                         }
                     break;
 
-                    case 4: return new Element(lexeme, token, (int)Grammar.Semicolon);
+                    case 4: return new LexicalElement(lexeme, token, (int)Grammar.Semicolon);
 
-                    case 5: return new Element(lexeme, token, (int)Grammar.Comma);
+                    case 5: return new LexicalElement(lexeme, token, (int)Grammar.Comma);
 
-                    case 6: return new Element(lexeme, token, (int)Grammar.LeftParenthesis);
+                    case 6: return new LexicalElement(lexeme, token, (int)Grammar.LeftParenthesis);
 
-                    case 7: return new Element(lexeme, token, (int)Grammar.RightParenthesis);
+                    case 7: return new LexicalElement(lexeme, token, (int)Grammar.RightParenthesis);
 
-                    case 8: return new Element(lexeme, token, (int)Grammar.LeftCurlyBrace);
+                    case 8: return new LexicalElement(lexeme, token, (int)Grammar.LeftCurlyBrace);
 
-                    case 9: return new Element(lexeme, token, (int)Grammar.RightCurlyBrace);
+                    case 9: return new LexicalElement(lexeme, token, (int)Grammar.RightCurlyBrace);
 
-                    case 10: return new Element(lexeme, token, (int)Grammar.DollarSing);
+                    case 10: return new LexicalElement(lexeme, token, (int)Grammar.DollarSing);
 
                     case 11:
                         if (s[i] == '=') {
                             lexeme += s[i];
-                            return new Element(lexeme, token, (int)Grammar.RelationalOperator);
+                            return new LexicalElement(lexeme, token, (int)Grammar.RelationalOperator);
                         }
                     break;
 
                     case 12:
                         if (s[i] == '=')
                             lexeme += s[i];
-                        return new Element(lexeme, token, (int)Grammar.RelationalOperator);
+                        return new LexicalElement(lexeme, token, (int)Grammar.RelationalOperator);
 
                     case 13:
                         if (s[i] == '=')
                             lexeme += s[i];
-                        return new Element(lexeme, token, (int)Grammar.RelationalOperator);
+                        return new LexicalElement(lexeme, token, (int)Grammar.RelationalOperator);
 
                     case 14:
                         if (s[i] == '=') {
                             lexeme += s[i];
                             token = Grammar.RelationalOperator.ToString();
-                            return new Element(lexeme, token, (int)Grammar.RelationalOperator);
+                            return new LexicalElement(lexeme, token, (int)Grammar.RelationalOperator);
                         }
                         token = Grammar.AssignmentOperator.ToString();
-                        return new Element(lexeme, token, (int)Grammar.AssignmentOperator);
+                        return new LexicalElement(lexeme, token, (int)Grammar.AssignmentOperator);
 
                     case 15:
                         if (s[i] == '|') {
                             lexeme += s[i];
-                            return new Element(lexeme, token, (int)Grammar.LogicOperator);
+                            return new LexicalElement(lexeme, token, (int)Grammar.LogicOperator);
                         }
                     break;
 
                     case 16:
                         if (s[i] == '|') {
                             lexeme += s[i];
-                            return new Element(lexeme, token, (int)Grammar.LogicOperator);
+                            return new LexicalElement(lexeme, token, (int)Grammar.LogicOperator);
                         }
                     break;
 
-                    case 17: return new Element(lexeme, token, (int)Grammar.AdditionOperator);
+                    case 17: return new LexicalElement(lexeme, token, (int)Grammar.AdditionOperator);
 
-                    case 18: return new Element(lexeme, token, (int)Grammar.MultiplicationOperator);
+                    case 18: return new LexicalElement(lexeme, token, (int)Grammar.MultiplicationOperator);
 
-                    case 19: return new Element(lexeme, token, (int)Grammar.DataType);
+                    case 19: return new LexicalElement(lexeme, token, (int)Grammar.DataType);
 
-                    case 20: return new Element(lexeme, token, (int)Grammar.KeyWord);
+                    case 20: return new LexicalElement(lexeme, token, (int)Grammar.KeyWord);
 
                     case -1: return null;
                 }
