@@ -9,6 +9,27 @@ namespace compiler
     internal class Analyzers
     {
 
+        enum Grammar
+        {
+            Identifier = 0,
+            Number = 1,
+            Semicolon = 2,
+            comma = 3,
+            LeftParenthesis = 4,
+            RightParenthesis = 5,
+            LeftCurlyBrace = 6,
+            RightCurlyBrace = 7,
+            DollarSing = 8,
+            RelationalOperator = 9,
+            Assignment = 10,
+            LogicOperator = 11,
+            AdditionOperator = 12,
+            MultiplicationOperator = 13,
+            DataType = 14,
+            KeyWord = 15
+        }
+
+
         public static Element lexicalAnalyze(string s)
         {
             int state = 0;
