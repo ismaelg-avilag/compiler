@@ -54,45 +54,45 @@ namespace compiler
                             break;
                         }
                         else if (line[i] == ';') {
-                            state = 4;
                             lexeme += line[i];
-                            token = Grammar.Semicolon.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.Semicolon.ToString(), (int)Grammar.Semicolon));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == ',') {
-                            state = 5;
                             lexeme += line[i];
-                            token = Grammar.Comma.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.Comma.ToString(), (int)Grammar.Comma));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '(') {
-                            state = 6;
                             lexeme += line[i];
-                            token = Grammar.LeftParenthesis.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.LeftParenthesis.ToString(), (int)Grammar.LeftParenthesis));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == ')') {
-                            state = 7;
                             lexeme += line[i];
-                            token = Grammar.RightParenthesis.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.RightParenthesis.ToString(), (int)Grammar.RightParenthesis));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '{') {
-                            state = 8;
                             lexeme += line[i];
-                            token = Grammar.LeftCurlyBrace.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.LeftCurlyBrace.ToString(), (int)Grammar.LeftCurlyBrace));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '}') {
-                            state = 9;
                             lexeme += line[i];
-                            token = Grammar.RightCurlyBrace.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.RightCurlyBrace.ToString(), (int)Grammar.RightCurlyBrace));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '$') {
-                            state = 10;
                             lexeme += line[i];
-                            token = Grammar.DollarSing.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.DollarSing.ToString(), (int)Grammar.DollarSing));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '!') {
@@ -131,15 +131,15 @@ namespace compiler
                             break;
                         }
                         else if (line[i] == '+' || line[i] == '-') {
-                            state = 17;
                             lexeme += line[i];
-                            token = Grammar.AdditionOperator.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.AdditionOperator.ToString(), (int)Grammar.AdditionOperator));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '*' || line[i] == '/') {
-                            state = 18;
                             lexeme += line[i];
-                            token = Grammar.MultiplicationOperator.ToString();
+                            elements.Add(new LexicalElement(lexeme, Grammar.MultiplicationOperator.ToString(), (int)Grammar.MultiplicationOperator));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                     break;
@@ -194,20 +194,6 @@ namespace compiler
                         }
                     break;
 
-                    case 4: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.Semicolon)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 5: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.Comma)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 6: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.LeftParenthesis)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 7: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.RightParenthesis)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 8: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.LeftCurlyBrace)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 9: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.RightCurlyBrace)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 10: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.DollarSing)); state = 0; lexeme = ""; token = ""; break;
-
                     case 11:
                         if (line[i] == '=') {
                             lexeme += line[i];
@@ -261,10 +247,6 @@ namespace compiler
                             state = 0; lexeme = ""; token = "";
                         }
                     break;
-
-                    case 17: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.AdditionOperator)); state = 0; lexeme = ""; token = ""; break;
-
-                    case 18: elements.Add(new LexicalElement(lexeme, token, (int)Grammar.MultiplicationOperator)); state = 0; lexeme = ""; token = ""; break;
                 }
             }
         }
