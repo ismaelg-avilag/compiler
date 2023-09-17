@@ -41,7 +41,19 @@ namespace compiler
             for(int i=0; i<s.Length; i++) {
                 switch(state) {
                     case 0:
-                        if (Char.IsLetter(s[i]) || s[i] == '_') {
+                        if (s == "int" || s == "float") {
+                            state = 19;
+                            lexeme = s;
+                            token = Grammar.DataType.ToString();
+                            break;
+                        }
+                        else if (s == "if" || s == "else" || s == "while" || s == "return") {
+                            state = 20;
+                            lexeme = s;
+                            token = Grammar.KeyWord.ToString();
+                            break;
+                        }
+                        else if (Char.IsLetter(s[i]) || s[i] == '_') {
                             state = 1;
                             lexeme += s[i];
                             token = Grammar.Identifier.ToString();
@@ -140,18 +152,6 @@ namespace compiler
                             state = 18;
                             lexeme += s[i];
                             token = Grammar.MultiplicationOperator.ToString();
-                            break;
-                        }
-                        else if(s == "int" || s == "float") {
-                            state = 19;
-                            lexeme = s;
-                            token = Grammar.DataType.ToString();
-                            break;
-                        }
-                        else if(s == "if" || s == "else" || s == "while" || s == "return") {
-                            state = 20;
-                            lexeme = s;
-                            token = Grammar.KeyWord.ToString();
                             break;
                         }
                         else
