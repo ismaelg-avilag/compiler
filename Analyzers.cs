@@ -41,9 +41,7 @@ namespace compiler
             for(int i=0; i<s.Length; i++) {
                 switch(state) {
                     case 0:
-                        if (s[i] == ' ')
-                            state = 0;
-                        else if (Char.IsLetter(s[i]) || s[i] == '_') {
+                        if (Char.IsLetter(s[i]) || s[i] == '_') {
                             state = 1;
                             lexeme += s[i];
                             token = Grammar.Identifier.ToString();
@@ -156,7 +154,8 @@ namespace compiler
                             token = Grammar.KeyWord.ToString();
                             break;
                         }
-
+                        else
+                            state = -1;
                         break;
 
                     case 1:
@@ -258,12 +257,12 @@ namespace compiler
 
                     case 20: return new Element(lexeme, token, (int)Grammar.KeyWord);
 
-                    default: return null;
+                    case -1: return null;
                 }
             }
-
-
+            return null;
         }
+
 
     }
 }
