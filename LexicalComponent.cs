@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace compiler
 {
-    internal class LexicalElement
+    internal class LexicalComponent
     {
         string lexeme;
         string token;
         int number;
 
-        public LexicalElement() { }
+        public LexicalComponent() { }
 
-        public LexicalElement(string lexeme, string token, int number)
+        public LexicalComponent(string lexeme, string token, int number)
         {
             this.lexeme = lexeme;
             this.token = token;

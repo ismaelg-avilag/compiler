@@ -33,9 +33,9 @@
             textBoxInput = new TextBox();
             textBoxOutput = new TextBox();
             listView1 = new ListView();
+            columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
-            columnHeader1 = new ColumnHeader();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -51,6 +51,7 @@
             buttonLexicalAnalyzer.TabIndex = 0;
             buttonLexicalAnalyzer.Text = "Analizador Léxico";
             buttonLexicalAnalyzer.UseVisualStyleBackColor = false;
+            buttonLexicalAnalyzer.Click += buttonLexicalAnalyzer_Click;
             // 
             // label1
             // 
@@ -76,18 +77,23 @@
             // textBoxOutput
             // 
             textBoxOutput.Cursor = Cursors.No;
+            textBoxOutput.Enabled = false;
             textBoxOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxOutput.ForeColor = Color.Red;
             textBoxOutput.Location = new Point(920, 57);
             textBoxOutput.Multiline = true;
             textBoxOutput.Name = "textBoxOutput";
-            textBoxOutput.PlaceholderText = "Análisis Sintáctico";
             textBoxOutput.ReadOnly = true;
             textBoxOutput.Size = new Size(350, 350);
             textBoxOutput.TabIndex = 3;
+            textBoxOutput.Text = "Análisis Sintáctico - No disponible por el momento";
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader3, columnHeader1 });
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
+            listView1.GridLines = true;
+            listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            listView1.HoverSelection = true;
             listView1.Location = new Point(11, 458);
             listView1.Name = "listView1";
             listView1.Size = new Size(1260, 383);
@@ -95,23 +101,22 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
             // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Lexema";
+            columnHeader1.Width = 416;
+            // 
             // columnHeader2
             // 
-            columnHeader2.DisplayIndex = 1;
             columnHeader2.Text = "Token";
-            columnHeader2.Width = 240;
+            columnHeader2.TextAlign = HorizontalAlignment.Center;
+            columnHeader2.Width = 416;
             // 
             // columnHeader3
             // 
-            columnHeader3.DisplayIndex = 2;
             columnHeader3.Text = "Tipo";
-            columnHeader3.Width = 420;
-            // 
-            // columnHeader1
-            // 
-            columnHeader1.DisplayIndex = 0;
-            columnHeader1.Text = "Lexema";
-            columnHeader1.Width = 420;
+            columnHeader3.TextAlign = HorizontalAlignment.Center;
+            columnHeader3.Width = 416;
             // 
             // Form1
             // 
