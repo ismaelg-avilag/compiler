@@ -45,7 +45,21 @@ namespace compiler
                             state = 1;
                             lexeme += line[i];
                             token = Grammar.Identifier.ToString();
-                            break;
+
+                            if (!Char.IsDigit(line[i + 1]) && !Char.IsLetter(line[i + 1]) && line[i + 1] != '_') {
+                                if (lexeme == "int" || lexeme == "float")
+                                    elements.Add(new LexicalElement(lexeme, Grammar.DataType.ToString(), (int)Grammar.DataType));
+
+                                else if (lexeme == "if" || lexeme == "else" || lexeme == "while" || lexeme == "return")
+                                    elements.Add(new LexicalElement(lexeme, Grammar.KeyWord.ToString(), (int)Grammar.KeyWord));
+
+                                else
+                                    elements.Add(new LexicalElement(lexeme, token, (int)Grammar.Identifier));
+
+                                state = 0; lexeme = ""; token = "";
+                            }
+
+                             break;
                         }
                         else if (Char.IsDigit(line[i])) {
                             state = 2;
@@ -149,18 +163,19 @@ namespace compiler
                             state = 1;
                             lexeme += line[i];
                             token = Grammar.Identifier.ToString();
-                        }
-                        else {
-                            if (lexeme == "int" || lexeme == "float")
-                                elements.Add(new LexicalElement(lexeme, Grammar.DataType.ToString(), (int)Grammar.DataType));
+                            
+                            if (!Char.IsDigit(line[i+1]) && !Char.IsLetter(line[i+1]) && line[i+1] != '_') {
+                                if (lexeme == "int" || lexeme == "float")
+                                    elements.Add(new LexicalElement(lexeme, Grammar.DataType.ToString(), (int)Grammar.DataType));
 
-                            else if (lexeme == "if" || lexeme == "else" || lexeme == "while" || lexeme == "return")
-                                elements.Add(new LexicalElement(lexeme, Grammar.KeyWord.ToString(), (int)Grammar.KeyWord));
+                                else if (lexeme == "if" || lexeme == "else" || lexeme == "while" || lexeme == "return")
+                                    elements.Add(new LexicalElement(lexeme, Grammar.KeyWord.ToString(), (int)Grammar.KeyWord));
 
-                            else
-                                elements.Add(new LexicalElement(lexeme, token, (int)Grammar.Identifier));
+                                else
+                                    elements.Add(new LexicalElement(lexeme, token, (int)Grammar.Identifier));
 
-                            state = 0; lexeme = ""; token = "";
+                                state = 0; lexeme = ""; token = "";
+                            }
                         }
 
                     break;
