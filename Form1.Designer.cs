@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             buttonLexicalAnalyzer = new Button();
             label1 = new Label();
             textBoxInput = new TextBox();
@@ -57,7 +58,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.FromArgb(230, 221, 196);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(540, 9);
             label1.Name = "label1";
             label1.Size = new Size(253, 60);
@@ -66,8 +67,12 @@
             // 
             // textBoxInput
             // 
+            textBoxInput.BackColor = Color.FromArgb(35, 39, 46);
+            textBoxInput.BorderStyle = BorderStyle.None;
             textBoxInput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxInput.ForeColor = Color.FromArgb(97, 175, 239);
             textBoxInput.Location = new Point(12, 57);
+            textBoxInput.Margin = new Padding(5);
             textBoxInput.Multiline = true;
             textBoxInput.Name = "textBoxInput";
             textBoxInput.PlaceholderText = "Ingresa el código a analizar:";
@@ -76,6 +81,8 @@
             // 
             // textBoxOutput
             // 
+            textBoxOutput.BackColor = Color.FromArgb(35, 39, 46);
+            textBoxOutput.BorderStyle = BorderStyle.None;
             textBoxOutput.Cursor = Cursors.No;
             textBoxOutput.Enabled = false;
             textBoxOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -129,6 +136,7 @@
             Controls.Add(textBoxInput);
             Controls.Add(label1);
             Controls.Add(buttonLexicalAnalyzer);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
