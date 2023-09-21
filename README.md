@@ -47,7 +47,7 @@ The goal of this project is to build a compiler for educational purposes, coveri
 
 As part of the project evaluation, reports for each development stage have been created and are available in PDF format. You can access these reports through the following links:
 
-- [Lexical Analyzer Report (PDF)](link_to_lexical_analyzer_report.pdf)
+- [Lexical Analyzer Report (PDF)](https://github.com/ismaelg-avilag/compiler/blob/main/Reports/Analizador-Lexico.pdf)
 - [Syntax Analyzer Report (PDF)](link_to_syntax_analyzer_report.pdf)
 - [Semantic Analyzer Report (PDF)](link_to_semantic_analyzer_report.pdf)
 
