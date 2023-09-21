@@ -1,6 +1,6 @@
 # Compiler Project
 
-This is a compiler project developed as part of the Compiler Construction course at *Universidad de Guadalajara*. The project is divided into three main stages: Lexical Analyzer, Syntax Analyzer, and Semantic Analyzer. It is implemented in C# using the .NET 6.0 framework.
+This is a compiler project developed as part of the Compiler Construction course at **Universidad de Guadalajara**. The project is divided into three main stages: Lexical Analyzer, Syntax Analyzer, and Semantic Analyzer. It is implemented in C# using the .NET 6.0 framework.
 
 ## Table of Contents
 
