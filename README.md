@@ -33,13 +33,13 @@ The goal of this project is to build a compiler for educational purposes, coveri
 
 ## Participants
 
-- [Ismael Avila](https://www.linkedin.com/in/ismaelg-avilag) | [Ismaelg-Avilag](https://github.com/ismaelg-avilag)
+- [Ismael Avila](https://www.linkedin.com/in/ismaelg-avilag) | [GitHub: ismaelg-avilag](https://github.com/ismaelg-avilag)
   - Contact: ismaelg.avilag@gmail.com
 
-- [Issac Hernandez](https://www.linkedin.com/in/participant2linkedin) | [GitHub](https://github.com/isaac080G)
+- [Issac Hernandez](https://www.linkedin.com/in/participant2linkedin) | [GitHub: isaac080G](https://github.com/isaac080G)
   - Contact: participant2@email.com
 
-- [Diego Zepeda](https://www.linkedin.com/in/participant3linkedin) | [GitHub](https://github.com/diezep)
+- [Diego Zepeda](https://www.linkedin.com/in/participant3linkedin) | [GitHub: diezep](https://github.com/diezep)
   - Contact: participant3@email.com
 
 
