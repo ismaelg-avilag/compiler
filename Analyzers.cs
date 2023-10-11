@@ -17,19 +17,12 @@ namespace compiler
             Identifier = 0,
             Number = 1,
             Semicolon = 2,
-            Comma = 3,
-            LeftParenthesis = 4,
-            RightParenthesis = 5,
-            LeftCurlyBrace = 6,
-            RightCurlyBrace = 7,
-            DollarSing = 8,
-            RelationalOperator = 9,
-            AssignmentOperator = 10,
-            LogicOperator = 11,
-            AdditionOperator = 12,
-            MultiplicationOperator = 13,
-            DataType = 14,
-            KeyWord = 15
+            LeftParenthesis = 3,
+            RightParenthesis = 4,
+            DollarSing = 5,
+            AssignmentOperator = 6,
+            AdditionOperator = 7,
+            MultiplicationOperator = 8,
         }
 
 
@@ -47,19 +40,12 @@ namespace compiler
                             token = Grammar.Identifier.ToString();
 
                             if (!Char.IsDigit(line[i + 1]) && !Char.IsLetter(line[i + 1]) && line[i + 1] != '_') {
-                                if (lexeme == "int" || lexeme == "float")
-                                    elements.Add(new LexicalComponent(lexeme, Grammar.DataType.ToString(), (int)Grammar.DataType));
-
-                                else if (lexeme == "if" || lexeme == "else" || lexeme == "while" || lexeme == "return")
-                                    elements.Add(new LexicalComponent(lexeme, Grammar.KeyWord.ToString(), (int)Grammar.KeyWord));
-
-                                else
-                                    elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.Identifier));
+                                elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.Identifier));
 
                                 state = 0; lexeme = ""; token = "";
                             }
 
-                             break;
+                        break;
                         }
                         else if (Char.IsDigit(line[i])) {
                             state = 2;
@@ -70,12 +56,6 @@ namespace compiler
                         else if (line[i] == ';') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.Semicolon.ToString(), (int)Grammar.Semicolon));
-                            state = 0; lexeme = ""; token = "";
-                            break;
-                        }
-                        else if (line[i] == ',') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.Comma.ToString(), (int)Grammar.Comma));
                             state = 0; lexeme = ""; token = "";
                             break;
                         }
@@ -91,57 +71,16 @@ namespace compiler
                             state = 0; lexeme = ""; token = "";
                             break;
                         }
-                        else if (line[i] == '{') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.LeftCurlyBrace.ToString(), (int)Grammar.LeftCurlyBrace));
-                            state = 0; lexeme = ""; token = "";
-                            break;
-                        }
-                        else if (line[i] == '}') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RightCurlyBrace.ToString(), (int)Grammar.RightCurlyBrace));
-                            state = 0; lexeme = ""; token = "";
-                            break;
-                        }
                         else if (line[i] == '$') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.DollarSing.ToString(), (int)Grammar.DollarSing));
                             state = 0; lexeme = ""; token = "";
                             break;
                         }
-                        else if (line[i] == '!') {
-                            state = 11;
-                            lexeme += line[i];
-                            token = Grammar.RelationalOperator.ToString();
-                            break;
-                        }
-                        else if (line[i] == '>') {
-                            state = 12;
-                            lexeme += line[i];
-                            token = Grammar.RelationalOperator.ToString();
-                            break;
-                        }
-                        else if (line[i] == '<') {
-                            state = 13;
-                            lexeme += line[i];
-                            token = Grammar.RelationalOperator.ToString();
-                            break;
-                        }
                         else if (line[i] == '=') {
-                            state = 14;
                             lexeme += line[i];
-                            break;
-                        }
-                        else if (line[i] == '|') {
-                            state = 15;
-                            lexeme += line[i];
-                            token = Grammar.LogicOperator.ToString();
-                            break;
-                        }
-                        else if (line[i] == '&') {
-                            state = 16;
-                            lexeme += line[i];
-                            token = Grammar.LogicOperator.ToString();
+                            elements.Add(new LexicalComponent(lexeme, Grammar.AssignmentOperator.ToString(), (int)Grammar.AssignmentOperator));
+                            state = 0; lexeme = ""; token = "";
                             break;
                         }
                         else if (line[i] == '+' || line[i] == '-') {
@@ -165,14 +104,7 @@ namespace compiler
                             token = Grammar.Identifier.ToString();
                             
                             if (!Char.IsDigit(line[i+1]) && !Char.IsLetter(line[i+1]) && line[i+1] != '_') {
-                                if (lexeme == "int" || lexeme == "float")
-                                    elements.Add(new LexicalComponent(lexeme, Grammar.DataType.ToString(), (int)Grammar.DataType));
-
-                                else if (lexeme == "if" || lexeme == "else" || lexeme == "while" || lexeme == "return")
-                                    elements.Add(new LexicalComponent(lexeme, Grammar.KeyWord.ToString(), (int)Grammar.KeyWord));
-
-                                else
-                                    elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.Identifier));
+                                elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.Identifier));
 
                                 state = 0; lexeme = ""; token = "";
                             }
@@ -209,59 +141,6 @@ namespace compiler
                         }
                     break;
 
-                    case 11:
-                        if (line[i] == '=') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.RelationalOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                    break;
-
-                    case 12:
-                        if (line[i] == '=') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.RelationalOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                    break;
-
-                    case 13:
-                        if (line[i] == '=') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.RelationalOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                    break;
-
-                    case 14:
-                        if (line[i] == '=') {
-                            lexeme += line[i];
-                            token = Grammar.RelationalOperator.ToString();
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.RelationalOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                        else {
-                            token = Grammar.AssignmentOperator.ToString();
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.AssignmentOperator));
-                        }
-                        state = 0; lexeme = ""; token = "";
-                    break;
-
-                    case 15:
-                        if (line[i] == '|') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.LogicOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                    break;
-
-                    case 16:
-                        if (line[i] == '|') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.LogicOperator));
-                            state = 0; lexeme = ""; token = "";
-                        }
-                    break;
                 }
             }
         }
