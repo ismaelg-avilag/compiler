@@ -45,7 +45,11 @@ namespace compiler
             for(int i=0; i<line.Length; i++) {
                 switch(state) {
                     case 0:
-                        if (Char.IsLetter(line[i]) || line[i] == '_') {
+                        if (line[i] == ' ' || line[i] == '\t' || line[i] == '\n') {
+                            state = 0; lexeme = "";
+                        }
+
+                        else if (Char.IsLetter(line[i]) || line[i] == '_') {
                             state = 1;
                             lexeme += line[i];
 
@@ -65,8 +69,6 @@ namespace compiler
 
                                 state = 0; lexeme = "";
                             }
-
-                        break;
                         }
                         else if (Char.IsDigit(line[i])) {
                             state = 2;
