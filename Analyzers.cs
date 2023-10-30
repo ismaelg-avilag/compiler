@@ -14,15 +14,25 @@ namespace compiler
 
         enum Grammar
         {
-            Identifier = 0,
-            Number = 1,
+            DataType = 0,
+            Identifier = 1,
             Semicolon = 2,
-            LeftParenthesis = 3,
-            RightParenthesis = 4,
-            DollarSing = 5,
-            AssignmentOperator = 6,
-            AdditionOperator = 7,
-            MultiplicationOperator = 8,
+            Comma = 3,
+            LeftParenthesis = 4,
+            RightParenthesis = 5,
+            LeftCurlyBrace = 6,
+            RightCurlyBrace = 7,
+            AssignmentOperator = 8,
+            If = 9,
+            While = 10,
+            Return = 11,
+            Else = 12,
+            Number = 13,
+            AdditionOperator = 14,
+            LogicOperator = 15,
+            MultiplicationOperator = 16,
+            RelationalOperator = 17,
+            DollarSing = 18
         }
 
 
