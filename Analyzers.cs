@@ -40,7 +40,7 @@ namespace compiler
         public static void LexicalAnalyze(string line, List<LexicalComponent> elements)
         {
             int state = 0;
-            string lexeme = "", token = "";
+            string lexeme = "";
 
             for(int i=0; i<line.Length; i++) {
                 switch(state) {
@@ -48,7 +48,6 @@ namespace compiler
                         if (Char.IsLetter(line[i]) || line[i] == '_') {
                             state = 1;
                             lexeme += line[i];
-                            token = Grammar.Identifier.ToString();
 
                             if (!Char.IsDigit(line[i + 1]) && !Char.IsLetter(line[i + 1]) && line[i + 1] != '_') {
                                 if (lexeme == "int" || lexeme == "float" || lexeme == "char" || lexeme == "void")
@@ -62,9 +61,9 @@ namespace compiler
                                 else if (lexeme == "else")
                                     elements.Add(new LexicalComponent(lexeme, Grammar.Else.ToString(), (int)Grammar.Else));
                                 else
-                                    elements.Add(new LexicalComponent(lexeme, token, (int)Grammar.Identifier));
+                                    elements.Add(new LexicalComponent(lexeme, Grammar.Identifier.ToString(), (int)Grammar.Identifier));
 
-                                state = 0; lexeme = ""; token = "";
+                                state = 0; lexeme = "";
                             }
 
                         break;
@@ -76,37 +75,37 @@ namespace compiler
                         else if (line[i] == ';') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.Semicolon.ToString(), (int)Grammar.Semicolon));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == ',') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.Comma.ToString(), (int)Grammar.Comma));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '(') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.LeftParenthesis.ToString(), (int)Grammar.LeftParenthesis));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == ')') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.RightParenthesis.ToString(), (int)Grammar.RightParenthesis));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '{') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.LeftCurlyBrace.ToString(), (int)Grammar.LeftCurlyBrace));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '}') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.RightCurlyBrace.ToString(), (int)Grammar.RightCurlyBrace));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '$') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.DollarSing.ToString(), (int)Grammar.DollarSing));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '!') {
                             state = 11;
@@ -135,12 +134,12 @@ namespace compiler
                         else if (line[i] == '+' || line[i] == '-') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.AdditionOperator.ToString(), (int)Grammar.AdditionOperator));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '*' || line[i] == '/') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.MultiplicationOperator.ToString(), (int)Grammar.MultiplicationOperator));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                     break;
 
@@ -163,7 +162,7 @@ namespace compiler
                                 else
                                     elements.Add(new LexicalComponent(lexeme, Grammar.Identifier.ToString(), (int)Grammar.Identifier));
 
-                                state = 0; lexeme = ""; token = "";
+                                state = 0; lexeme = "";
                             }
                         }
 
@@ -180,7 +179,7 @@ namespace compiler
                         }
                         else {
                             elements.Add(new LexicalComponent(lexeme, Grammar.Number.ToString(), (int)Grammar.Number));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                     break;
 
@@ -191,7 +190,7 @@ namespace compiler
                         }
                         else {
                             elements.Add(new LexicalComponent(lexeme, Grammar.Number.ToString(), (int)Grammar.Number));
-                            state = 0; lexeme = ""; token = "";
+                            state = 0; lexeme = "";
                         }
                     break;
 
@@ -200,37 +199,31 @@ namespace compiler
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
                         }
-                        state = 0; lexeme = ""; token = "";
+                        state = 0; lexeme = "";
                     break;
 
                     case 12: // last lexeme = '<'
-                        if (line[i] == '=') {
+                        if (line[i] == '=')
                             lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        }
-                        else
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = ""; token = "";
+
+                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                        state = 0; lexeme = "";
                     break;
 
                     case 13: // last lexeme = '>'
-                        if (line[i] == '=') {
+                        if (line[i] == '=')
                             lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        }
-                        else
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = ""; token = "";
+                        
+                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                        state = 0; lexeme = "";
                     break;
 
                     case 14: // last lexeme = '='
-                        if (line[i] == '=') {
+                        if (line[i] == '=')
                             lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        }
-                        else
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = ""; token = "";
+                        
+                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                        state = 0; lexeme = "";
                     break;
 
                 }
