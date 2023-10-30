@@ -110,28 +110,61 @@ namespace compiler
                             state = 0; lexeme = "";
                         }
                         else if (line[i] == '!') {
-                            state = 11;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '=') {
+                                lexeme += line[i + 1];
+                                elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                            }
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '<') {
-                            state = 12;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '=')
+                                lexeme += line[i + 1];
+                            
+                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '>') {
-                            state = 13;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '=')
+                                lexeme += line[i + 1];
+
+                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '=') {
-                            state = 14;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '=') {
+                                lexeme += line[i + 1];
+                                elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
+                            }
+                            else
+                                elements.Add(new LexicalComponent(lexeme, Grammar.AssignmentOperator.ToString(), (int)Grammar.AssignmentOperator));
+
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '|') {
-                            state = 19;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '|') {
+                                lexeme += line[i + 1];
+                                elements.Add(new LexicalComponent(lexeme, Grammar.LogicOperator.ToString(), (int)Grammar.LogicOperator));
+                            }
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '&') {
-                            state = 21;
                             lexeme += line[i];
+
+                            if (line[i + 1] == '&') {
+                                lexeme += line[i + 1];
+                                elements.Add(new LexicalComponent(lexeme, Grammar.LogicOperator.ToString(), (int)Grammar.LogicOperator));
+                            }
+                            state = 0; lexeme = "";
                         }
                         else if (line[i] == '+' || line[i] == '-') {
                             lexeme += line[i];
@@ -194,38 +227,6 @@ namespace compiler
                             elements.Add(new LexicalComponent(lexeme, Grammar.Number.ToString(), (int)Grammar.Number));
                             state = 0; lexeme = "";
                         }
-                    break;
-
-                    case 11: // last lexeme = '!'
-                        if (line[i] == '=') {
-                            lexeme += line[i];
-                            elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        }
-                        state = 0; lexeme = "";
-                    break;
-
-                    case 12: // last lexeme = '<'
-                        if (line[i] == '=')
-                            lexeme += line[i];
-
-                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = "";
-                    break;
-
-                    case 13: // last lexeme = '>'
-                        if (line[i] == '=')
-                            lexeme += line[i];
-                        
-                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = "";
-                    break;
-
-                    case 14: // last lexeme = '='
-                        if (line[i] == '=')
-                            lexeme += line[i];
-                        
-                        elements.Add(new LexicalComponent(lexeme, Grammar.RelationalOperator.ToString(), (int)Grammar.RelationalOperator));
-                        state = 0; lexeme = "";
                     break;
 
                 }
