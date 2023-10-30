@@ -4,13 +4,17 @@ namespace compiler
 {
     public partial class Form1 : Form
     {
-        List<LexicalComponent> lexicalComponents;
+        private List<LexicalComponent> lexicalComponents;
+        private int[,] parsingTable;
+        private int[,] parsingRules;
 
         public Form1()
         {
             InitializeComponent();
 
             lexicalComponents = new List<LexicalComponent>();
+            parsingTable = loadParsingTable();
+            parsingRules = loadParsingRules();
         }
 
         private void buttonLexicalAnalyzer_Click(object sender, EventArgs e)
@@ -27,5 +31,43 @@ namespace compiler
                 listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
 
         }
+
+        private int[,] loadParsingTable()
+        {
+            int rows = 84, columns = 40;
+            int[,] parsingTable = new int[rows, columns];
+
+            string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Table-id.txt");
+
+            for (int i = 0; i < rows; i++)
+            {
+                string[] values = lines[i].Split('\t');
+
+                for (int j = 0; j < columns; j++)
+                    if (int.TryParse(values[j], out int parsedValue))
+                        parsingTable[i, j] = parsedValue;
+            }
+
+            return parsingTable;
+        }
+
+        private int[,] loadParsingRules()
+        {
+            int rows = 43, columns = 2;
+            int[,] parsingRules = new int[rows, columns];
+
+            string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Rules-id.txt");
+
+            for (int i = 0; i < rows; i++) {
+                string[] values = lines[i].Split('\t');
+
+                for (int j = 0; j < columns; j++)
+                    if (int.TryParse(values[j], out int parsedValue))
+                        parsingRules[i, j] = parsedValue;
+            }
+
+            return parsingRules;
+        }
+
     }
 }
