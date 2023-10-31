@@ -1,3 +1,4 @@
+using System.Drawing.Text;
 using System.Runtime.CompilerServices;
 
 namespace compiler
@@ -19,6 +20,9 @@ namespace compiler
 
         private void buttonLexicalAnalyzer_Click(object sender, EventArgs e)
         {
+            lexicalComponents.Clear();
+            listView1.Items.Clear();
+
             List<string> lines = new List<String>();
 
             foreach (string line in textBoxInput.Lines)
@@ -29,7 +33,6 @@ namespace compiler
 
             foreach (LexicalComponent component in lexicalComponents)
                 listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
-
         }
 
         private void buttonSintaxAnalyzer_Click(object sender, EventArgs e)
@@ -44,9 +47,35 @@ namespace compiler
             }
         }
 
+        private void buttonBlackBox_Click(object sender, EventArgs e)
+        {
+            string[] lines = new string[4];
+
+            lines[0] = "int a 0;";
+            lines[1] = "int a =;";
+            lines[2] = "if else";
+            lines[3] = "int a = 0";
+
+            textBoxInput.Text = "";
+            textBoxInput.Lines = lines;
+        }
+
+        private void buttonWhiteBox_Click(object sender, EventArgs e)
+        {
+            string[] lines = new string[4];
+
+            lines[0] = "int a = 0;";
+            lines[1] = "float area;";
+            lines[2] = "b = 0.001";
+            lines[3] = "while(1)";
+
+            textBoxInput.Text = "";
+            textBoxInput.Lines = lines;
+        }
+
         private int[,] loadParsingTable()
         {
-            int rows = 84, columns = 40;
+            int rows = 84, columns = 39;
             int[,] parsingTable = new int[rows, columns];
 
             string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Table-id.txt");
@@ -70,7 +99,8 @@ namespace compiler
 
             string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Rules-id.txt");
 
-            for (int i = 0; i < rows; i++) {
+            for (int i = 0; i < rows; i++)
+            {
                 string[] values = lines[i].Split('\t');
 
                 for (int j = 0; j < columns; j++)

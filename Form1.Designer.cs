@@ -38,6 +38,8 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             buttonSintaxAnalyzer = new Button();
+            buttonBlackBox = new Button();
+            buttonWhiteBox = new Button();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -47,7 +49,7 @@
             buttonLexicalAnalyzer.FlatStyle = FlatStyle.Popup;
             buttonLexicalAnalyzer.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonLexicalAnalyzer.ForeColor = Color.Black;
-            buttonLexicalAnalyzer.Location = new Point(222, 315);
+            buttonLexicalAnalyzer.Location = new Point(222, 363);
             buttonLexicalAnalyzer.Name = "buttonLexicalAnalyzer";
             buttonLexicalAnalyzer.Size = new Size(180, 70);
             buttonLexicalAnalyzer.TabIndex = 0;
@@ -58,11 +60,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
             label1.Location = new Point(268, 9);
             label1.Name = "label1";
-            label1.Size = new Size(823, 60);
+            label1.Size = new Size(750, 54);
             label1.TabIndex = 1;
             label1.Text = "Compilador - Seminario de Traductores 2";
             // 
@@ -72,7 +74,7 @@
             textBoxInput.BorderStyle = BorderStyle.None;
             textBoxInput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxInput.ForeColor = Color.FromArgb(97, 175, 239);
-            textBoxInput.Location = new Point(14, 95);
+            textBoxInput.Location = new Point(14, 165);
             textBoxInput.Margin = new Padding(5);
             textBoxInput.Multiline = true;
             textBoxInput.Name = "textBoxInput";
@@ -87,7 +89,7 @@
             textBoxSyntaxAnalyzeOutput.Cursor = Cursors.No;
             textBoxSyntaxAnalyzeOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxSyntaxAnalyzeOutput.ForeColor = Color.Red;
-            textBoxSyntaxAnalyzeOutput.Location = new Point(664, 425);
+            textBoxSyntaxAnalyzeOutput.Location = new Point(664, 473);
             textBoxSyntaxAnalyzeOutput.Multiline = true;
             textBoxSyntaxAnalyzeOutput.Name = "textBoxSyntaxAnalyzeOutput";
             textBoxSyntaxAnalyzeOutput.ReadOnly = true;
@@ -100,7 +102,7 @@
             listView1.GridLines = true;
             listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView1.HoverSelection = true;
-            listView1.Location = new Point(12, 425);
+            listView1.Location = new Point(12, 473);
             listView1.Name = "listView1";
             listView1.Size = new Size(600, 250);
             listView1.TabIndex = 4;
@@ -131,7 +133,7 @@
             buttonSintaxAnalyzer.FlatStyle = FlatStyle.Popup;
             buttonSintaxAnalyzer.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSintaxAnalyzer.ForeColor = Color.Black;
-            buttonSintaxAnalyzer.Location = new Point(877, 315);
+            buttonSintaxAnalyzer.Location = new Point(877, 363);
             buttonSintaxAnalyzer.Name = "buttonSintaxAnalyzer";
             buttonSintaxAnalyzer.Size = new Size(180, 70);
             buttonSintaxAnalyzer.TabIndex = 6;
@@ -139,12 +141,42 @@
             buttonSintaxAnalyzer.UseVisualStyleBackColor = false;
             buttonSintaxAnalyzer.Click += buttonSintaxAnalyzer_Click;
             // 
+            // buttonBlackBox
+            // 
+            buttonBlackBox.BackColor = Color.Black;
+            buttonBlackBox.FlatStyle = FlatStyle.Popup;
+            buttonBlackBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonBlackBox.ForeColor = Color.White;
+            buttonBlackBox.Location = new Point(268, 91);
+            buttonBlackBox.Name = "buttonBlackBox";
+            buttonBlackBox.Size = new Size(136, 43);
+            buttonBlackBox.TabIndex = 7;
+            buttonBlackBox.Text = "Caja Negra";
+            buttonBlackBox.UseVisualStyleBackColor = false;
+            buttonBlackBox.Click += buttonBlackBox_Click;
+            // 
+            // buttonWhiteBox
+            // 
+            buttonWhiteBox.BackColor = Color.White;
+            buttonWhiteBox.FlatStyle = FlatStyle.Popup;
+            buttonWhiteBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonWhiteBox.ForeColor = Color.Black;
+            buttonWhiteBox.Location = new Point(882, 91);
+            buttonWhiteBox.Name = "buttonWhiteBox";
+            buttonWhiteBox.Size = new Size(136, 43);
+            buttonWhiteBox.TabIndex = 8;
+            buttonWhiteBox.Text = "Caja Blanca";
+            buttonWhiteBox.UseVisualStyleBackColor = false;
+            buttonWhiteBox.Click += buttonWhiteBox_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(7, 59, 76);
-            ClientSize = new Size(1282, 687);
+            ClientSize = new Size(1282, 735);
+            Controls.Add(buttonWhiteBox);
+            Controls.Add(buttonBlackBox);
             Controls.Add(buttonSintaxAnalyzer);
             Controls.Add(listView1);
             Controls.Add(textBoxSyntaxAnalyzeOutput);
@@ -170,5 +202,7 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private Button buttonSintaxAnalyzer;
+        private Button buttonBlackBox;
+        private Button buttonWhiteBox;
     }
 }
