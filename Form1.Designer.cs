@@ -32,7 +32,7 @@
             buttonLexicalAnalyzer = new Button();
             label1 = new Label();
             textBoxInput = new TextBox();
-            textBoxOutput = new TextBox();
+            textBoxSyntaxAnalyzeOutput = new TextBox();
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
@@ -80,21 +80,19 @@
             textBoxInput.Size = new Size(1254, 173);
             textBoxInput.TabIndex = 2;
             // 
-            // textBoxOutput
+            // textBoxSyntaxAnalyzeOutput
             // 
-            textBoxOutput.BackColor = Color.FromArgb(35, 39, 46);
-            textBoxOutput.BorderStyle = BorderStyle.None;
-            textBoxOutput.Cursor = Cursors.No;
-            textBoxOutput.Enabled = false;
-            textBoxOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxOutput.ForeColor = Color.Red;
-            textBoxOutput.Location = new Point(664, 425);
-            textBoxOutput.Multiline = true;
-            textBoxOutput.Name = "textBoxOutput";
-            textBoxOutput.ReadOnly = true;
-            textBoxOutput.Size = new Size(606, 250);
-            textBoxOutput.TabIndex = 3;
-            textBoxOutput.Text = "Análisis Sintáctico no disponible... por el momento";
+            textBoxSyntaxAnalyzeOutput.BackColor = Color.FromArgb(35, 39, 46);
+            textBoxSyntaxAnalyzeOutput.BorderStyle = BorderStyle.None;
+            textBoxSyntaxAnalyzeOutput.Cursor = Cursors.No;
+            textBoxSyntaxAnalyzeOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxSyntaxAnalyzeOutput.ForeColor = Color.Red;
+            textBoxSyntaxAnalyzeOutput.Location = new Point(664, 425);
+            textBoxSyntaxAnalyzeOutput.Multiline = true;
+            textBoxSyntaxAnalyzeOutput.Name = "textBoxSyntaxAnalyzeOutput";
+            textBoxSyntaxAnalyzeOutput.ReadOnly = true;
+            textBoxSyntaxAnalyzeOutput.Size = new Size(606, 250);
+            textBoxSyntaxAnalyzeOutput.TabIndex = 3;
             // 
             // listView1
             // 
@@ -139,6 +137,7 @@
             buttonSintaxAnalyzer.TabIndex = 6;
             buttonSintaxAnalyzer.Text = "Analizador Sintáctico";
             buttonSintaxAnalyzer.UseVisualStyleBackColor = false;
+            buttonSintaxAnalyzer.Click += buttonSintaxAnalyzer_Click;
             // 
             // Form1
             // 
@@ -148,7 +147,7 @@
             ClientSize = new Size(1282, 687);
             Controls.Add(buttonSintaxAnalyzer);
             Controls.Add(listView1);
-            Controls.Add(textBoxOutput);
+            Controls.Add(textBoxSyntaxAnalyzeOutput);
             Controls.Add(textBoxInput);
             Controls.Add(label1);
             Controls.Add(buttonLexicalAnalyzer);
@@ -165,7 +164,7 @@
         private Button buttonLexicalAnalyzer;
         private Label label1;
         private TextBox textBoxInput;
-        private TextBox textBoxOutput;
+        private TextBox textBoxSyntaxAnalyzeOutput;
         private ListView listView1;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;

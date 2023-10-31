@@ -32,6 +32,18 @@ namespace compiler
 
         }
 
+        private void buttonSintaxAnalyzer_Click(object sender, EventArgs e)
+        {
+            if (Analyzers.SyntaxAnalyze(lexicalComponents, parsingTable, parsingRules)) {
+                textBoxSyntaxAnalyzeOutput.Text = "El texto ingresado es válido";
+                textBoxSyntaxAnalyzeOutput.ForeColor = Color.Green;
+            }
+            else {
+                textBoxSyntaxAnalyzeOutput.Text = "El texto ingresado no es válido";
+                textBoxSyntaxAnalyzeOutput.ForeColor = Color.Red;
+            }
+        }
+
         private int[,] loadParsingTable()
         {
             int rows = 84, columns = 40;
