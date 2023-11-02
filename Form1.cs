@@ -5,7 +5,7 @@ namespace compiler
 {
     public partial class Form1 : Form
     {
-        private List<LexicalComponent> lexicalComponents;
+        private List<List<LexicalComponent>> lexicalComponents;
         private int[,] parsingTable;
         private int[,] parsingRules;
 
@@ -13,7 +13,7 @@ namespace compiler
         {
             InitializeComponent();
 
-            lexicalComponents = new List<LexicalComponent>();
+            lexicalComponents = new List<List<LexicalComponent>>();
             parsingTable = loadParsingTable();
             parsingRules = loadParsingRules();
         }
@@ -29,21 +29,32 @@ namespace compiler
                 lines.Add(line + "$");
 
             foreach (string line in lines)
-                Analyzers.LexicalAnalyze(line, lexicalComponents);
+            {
+                List<LexicalComponent> lineComponents = new List<LexicalComponent>();
+                lexicalComponents.Add(lineComponents);
+                Analyzers.LexicalAnalyze(line, lineComponents);
+            }
 
-            foreach (LexicalComponent component in lexicalComponents)
-                listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
+            foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
+                foreach (LexicalComponent component in lineComponentes)
+                    listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
         }
 
         private void buttonSintaxAnalyzer_Click(object sender, EventArgs e)
         {
-            if (Analyzers.SyntaxAnalyze(lexicalComponents, parsingTable, parsingRules)) {
-                textBoxSyntaxAnalyzeOutput.Text = "El texto ingresado es válido";
-                textBoxSyntaxAnalyzeOutput.ForeColor = Color.Green;
-            }
-            else {
-                textBoxSyntaxAnalyzeOutput.Text = "El texto ingresado no es válido";
-                textBoxSyntaxAnalyzeOutput.ForeColor = Color.Red;
+            textBoxSyntaxAnalyzeOutput.Clear();
+
+            List<LexicalComponent> lineComponents;
+            for (int i = 0; i < lexicalComponents.Count; i++)
+            {
+                lineComponents = lexicalComponents[i];
+
+                if (Analyzers.SyntaxAnalyze(lineComponents, parsingTable, parsingRules))
+                    textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " es válido");
+                else
+                    textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " no es válido \n");
+
+                textBoxSyntaxAnalyzeOutput.AppendText(Environment.NewLine);
             }
         }
 

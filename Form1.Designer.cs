@@ -88,7 +88,7 @@
             textBoxSyntaxAnalyzeOutput.BorderStyle = BorderStyle.None;
             textBoxSyntaxAnalyzeOutput.Cursor = Cursors.No;
             textBoxSyntaxAnalyzeOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxSyntaxAnalyzeOutput.ForeColor = Color.Red;
+            textBoxSyntaxAnalyzeOutput.ForeColor = Color.FromArgb(97, 175, 239);
             textBoxSyntaxAnalyzeOutput.Location = new Point(664, 473);
             textBoxSyntaxAnalyzeOutput.Multiline = true;
             textBoxSyntaxAnalyzeOutput.Name = "textBoxSyntaxAnalyzeOutput";
