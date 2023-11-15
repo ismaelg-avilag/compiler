@@ -128,47 +128,9 @@ namespace compiler
         }
 
 
-        public static bool SyntaxAnalyze(List<LexicalComponent> elements, int[,] parsingTable, int[,] parsingRules)
+        public static bool SyntaxAnalyze(List<LexicalComponent> elements)
         {
-            Stack<int> stack = new Stack<int>();
-            stack.Push(0);
-
-            int elementId = 0;
-            int action, rule, pops, row, column;
-
-            bool isValid = false;
-
-            while(elementId < elements.Count) {
-                action = parsingTable[stack.Peek(), elements[elementId].Number];
-
-                if (action > 0) {
-                    stack.Push(elements[elementId].Number);
-                    stack.Push(action);
-                    elementId++;
-                }
-                else if (action == 1) {
-                    isValid = true;
-                    break;
-                }
-                else if (action == 0) {
-                    isValid = false;
-                    break;
-                }
-                
-                else if (action < -1) {
-                    rule = (action + 1) * -1;
-                    pops = parsingRules[rule, 1];
-
-                    for (int i = 0; i < pops * 2; i++)
-                        stack.Pop();
-
-                    row = stack.Peek();
-                    column = parsingRules[rule, 0];
-
-                    stack.Push(column);
-                    stack.Push(parsingTable[row, column]);
-                }
-            }
+            bool isValid = false;            
 
             return isValid;
         }

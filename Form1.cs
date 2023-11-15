@@ -6,16 +6,12 @@ namespace compiler
     public partial class Form1 : Form
     {
         private List<List<LexicalComponent>> lexicalComponents;
-        private int[,] parsingTable;
-        private int[,] parsingRules;
 
         public Form1()
         {
             InitializeComponent();
 
             lexicalComponents = new List<List<LexicalComponent>>();
-            parsingTable = loadParsingTable();
-            parsingRules = loadParsingRules();
         }
 
         private void buttonLexicalAnalyzer_Click(object sender, EventArgs e)
@@ -49,7 +45,7 @@ namespace compiler
             {
                 lineComponents = lexicalComponents[i];
 
-                if (Analyzers.SyntaxAnalyze(lineComponents, parsingTable, parsingRules))
+                if (Analyzers.SyntaxAnalyze(lineComponents))
                     textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " es válido");
                 else
                     textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " no es válido \n");
@@ -84,43 +80,6 @@ namespace compiler
             textBoxInput.Lines = lines;
         }
 
-        private int[,] loadParsingTable()
-        {
-            int rows = 84, columns = 39;
-            int[,] parsingTable = new int[rows, columns];
-
-            string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Table-id.txt");
-
-            for (int i = 0; i < rows; i++)
-            {
-                string[] values = lines[i].Split('\t');
-
-                for (int j = 0; j < columns; j++)
-                    if (int.TryParse(values[j], out int parsedValue))
-                        parsingTable[i, j] = parsedValue;
-            }
-
-            return parsingTable;
-        }
-
-        private int[,] loadParsingRules()
-        {
-            int rows = 43, columns = 2;
-            int[,] parsingRules = new int[rows, columns];
-
-            string[] lines = File.ReadAllLines("../../../SyntaxAnalyzeAuxFiles/SLR-Rules-id.txt");
-
-            for (int i = 0; i < rows; i++)
-            {
-                string[] values = lines[i].Split('\t');
-
-                for (int j = 0; j < columns; j++)
-                    if (int.TryParse(values[j], out int parsedValue))
-                        parsingRules[i, j] = parsedValue;
-            }
-
-            return parsingRules;
-        }
 
     }
 }
