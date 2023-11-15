@@ -1,31 +1,85 @@
+using System.Drawing.Text;
 using System.Runtime.CompilerServices;
 
 namespace compiler
 {
     public partial class Form1 : Form
     {
-        List<LexicalComponent> lexicalComponents;
+        private List<List<LexicalComponent>> lexicalComponents;
 
         public Form1()
         {
             InitializeComponent();
 
-            lexicalComponents = new List<LexicalComponent>();
+            lexicalComponents = new List<List<LexicalComponent>>();
         }
 
         private void buttonLexicalAnalyzer_Click(object sender, EventArgs e)
         {
+            lexicalComponents.Clear();
+            listView1.Items.Clear();
+
             List<string> lines = new List<String>();
 
             foreach (string line in textBoxInput.Lines)
                 lines.Add(line + "$");
 
             foreach (string line in lines)
-                Analyzers.LexicalAnalyze(line, lexicalComponents);
+            {
+                List<LexicalComponent> lineComponents = new List<LexicalComponent>();
+                lexicalComponents.Add(lineComponents);
+                Analyzers.LexicalAnalyze(line, lineComponents);
+            }
 
-            foreach (LexicalComponent component in lexicalComponents)
-                listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
-
+            foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
+                foreach (LexicalComponent component in lineComponentes)
+                    listView1.Items.Add(new ListViewItem(new String[] { component.Lexeme, component.Token, component.Number.ToString() }));
         }
+
+        private void buttonSintaxAnalyzer_Click(object sender, EventArgs e)
+        {
+            textBoxSyntaxAnalyzeOutput.Clear();
+
+            List<LexicalComponent> lineComponents;
+            for (int i = 0; i < lexicalComponents.Count; i++)
+            {
+                lineComponents = lexicalComponents[i];
+
+                if (Analyzers.SyntaxAnalyze(lineComponents))
+                    textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " es válido");
+                else
+                    textBoxSyntaxAnalyzeOutput.AppendText("El texto ingresado en la línea " + (i + 1) + " no es válido \n");
+
+                textBoxSyntaxAnalyzeOutput.AppendText(Environment.NewLine);
+            }
+        }
+
+        private void buttonBlackBox_Click(object sender, EventArgs e)
+        {
+            string[] lines = new string[4];
+
+            lines[0] = "int a 0;";
+            lines[1] = "int a =;";
+            lines[2] = "if else";
+            lines[3] = "int a = 0";
+
+            textBoxInput.Text = "";
+            textBoxInput.Lines = lines;
+        }
+
+        private void buttonWhiteBox_Click(object sender, EventArgs e)
+        {
+            string[] lines = new string[4];
+
+            lines[0] = "int a = 0;";
+            lines[1] = "float area;";
+            lines[2] = "b = 0.001";
+            lines[3] = "while(1)";
+
+            textBoxInput.Text = "";
+            textBoxInput.Lines = lines;
+        }
+
+
     }
 }
