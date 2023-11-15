@@ -3,7 +3,6 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -130,7 +129,80 @@ namespace compiler
 
         public static bool SyntaxAnalyze(List<LexicalComponent> elements)
         {
-            bool isValid = false;            
+            bool isValid = false;
+            int state = 0;
+
+            for(int i = 0; i < elements.Count; i++) {
+                switch(state) {
+                    case 0:
+                        if (elements[i].Number == (int)Grammar.Identifier)
+                            state = 1;
+                        else
+                            state = -1;
+                    break;
+                    
+                    case 1:
+                        if (elements[i].Number == (int)Grammar.AssignmentOperator)
+                            state = 2;
+                        else
+                            state = -1;
+                    break;
+
+                    case 2:
+                        if (elements[i].Number == (int)Grammar.Identifier)
+                            state = 3;
+                        
+                        else if (elements[i].Number == (int)Grammar.Number)
+                            state = 4;
+                        
+                        else
+                            state = -1;
+                    break;
+                    
+                    case 3:
+                        if (elements[i].Number == (int)Grammar.AdditionOperator || elements[i].Number == (int)Grammar.MultiplicationOperator)
+                            state = 5;
+                        
+                        else if (elements[i].Number == (int)Grammar.Semicolon)
+                            state = 6;
+
+                        else
+                            state = -1;
+                    break;
+
+                    case 4:
+                        if (elements[i].Number == (int)Grammar.AdditionOperator || elements[i].Number == (int)Grammar.MultiplicationOperator)
+                            state = 5;
+
+                        else if (elements[i].Number == (int)Grammar.Semicolon)
+                            state = 6;
+
+                        else
+                            state = -1;
+                    break;
+
+                    case 5:
+                        if (elements[i].Number == (int)Grammar.Identifier)
+                            state = 3;
+
+                        else if (elements[i].Number == (int)Grammar.Number)
+                            state = 4;
+
+                        else
+                            state = -1;
+                        break;
+
+                    case 6:
+                        if (elements[i].Number == (int)Grammar.DollarSing)
+                            isValid = true;
+                        
+                        state = -1;
+                    break;
+                }
+
+                if (state == -1)
+                    break;
+            }
 
             return isValid;
         }
