@@ -54,6 +54,11 @@ namespace compiler
             }
         }
 
+        private void buttonSemanticAnalyzer_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void buttonBlackBox_Click(object sender, EventArgs e)
         {
             string[] lines = new string[4];
@@ -79,7 +84,6 @@ namespace compiler
             textBoxInput.Text = "";
             textBoxInput.Lines = lines;
         }
-
 
     }
 }

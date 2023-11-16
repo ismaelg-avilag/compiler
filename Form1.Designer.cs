@@ -40,6 +40,8 @@
             buttonSintaxAnalyzer = new Button();
             buttonBlackBox = new Button();
             buttonWhiteBox = new Button();
+            textBox1 = new TextBox();
+            buttonSemanticAnalyzer = new Button();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -49,11 +51,11 @@
             buttonLexicalAnalyzer.FlatStyle = FlatStyle.Popup;
             buttonLexicalAnalyzer.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonLexicalAnalyzer.ForeColor = Color.Black;
-            buttonLexicalAnalyzer.Location = new Point(222, 363);
+            buttonLexicalAnalyzer.Location = new Point(221, 397);
             buttonLexicalAnalyzer.Name = "buttonLexicalAnalyzer";
             buttonLexicalAnalyzer.Size = new Size(180, 70);
             buttonLexicalAnalyzer.TabIndex = 0;
-            buttonLexicalAnalyzer.Text = "Analizador Léxico";
+            buttonLexicalAnalyzer.Text = "Análisis Léxico";
             buttonLexicalAnalyzer.UseVisualStyleBackColor = false;
             buttonLexicalAnalyzer.Click += buttonLexicalAnalyzer_Click;
             // 
@@ -62,7 +64,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(268, 9);
+            label1.Location = new Point(311, 9);
             label1.Name = "label1";
             label1.Size = new Size(750, 54);
             label1.TabIndex = 1;
@@ -75,11 +77,11 @@
             textBoxInput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxInput.ForeColor = Color.FromArgb(97, 175, 239);
             textBoxInput.Location = new Point(14, 165);
-            textBoxInput.Margin = new Padding(5);
+            textBoxInput.Margin = new Padding(10);
             textBoxInput.Multiline = true;
             textBoxInput.Name = "textBoxInput";
             textBoxInput.PlaceholderText = "Ingresa el código a analizar:";
-            textBoxInput.Size = new Size(1254, 173);
+            textBoxInput.Size = new Size(598, 180);
             textBoxInput.TabIndex = 2;
             // 
             // textBoxSyntaxAnalyzeOutput
@@ -89,11 +91,12 @@
             textBoxSyntaxAnalyzeOutput.Cursor = Cursors.No;
             textBoxSyntaxAnalyzeOutput.Font = new Font("Fira Code", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxSyntaxAnalyzeOutput.ForeColor = Color.FromArgb(97, 175, 239);
-            textBoxSyntaxAnalyzeOutput.Location = new Point(664, 473);
+            textBoxSyntaxAnalyzeOutput.Location = new Point(681, 165);
+            textBoxSyntaxAnalyzeOutput.Margin = new Padding(10);
             textBoxSyntaxAnalyzeOutput.Multiline = true;
             textBoxSyntaxAnalyzeOutput.Name = "textBoxSyntaxAnalyzeOutput";
             textBoxSyntaxAnalyzeOutput.ReadOnly = true;
-            textBoxSyntaxAnalyzeOutput.Size = new Size(606, 250);
+            textBoxSyntaxAnalyzeOutput.Size = new Size(550, 180);
             textBoxSyntaxAnalyzeOutput.TabIndex = 3;
             // 
             // listView1
@@ -133,11 +136,11 @@
             buttonSintaxAnalyzer.FlatStyle = FlatStyle.Popup;
             buttonSintaxAnalyzer.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSintaxAnalyzer.ForeColor = Color.Black;
-            buttonSintaxAnalyzer.Location = new Point(877, 363);
+            buttonSintaxAnalyzer.Location = new Point(866, 91);
             buttonSintaxAnalyzer.Name = "buttonSintaxAnalyzer";
             buttonSintaxAnalyzer.Size = new Size(180, 70);
             buttonSintaxAnalyzer.TabIndex = 6;
-            buttonSintaxAnalyzer.Text = "Analizador Sintáctico";
+            buttonSintaxAnalyzer.Text = "Análisis Sintáctico";
             buttonSintaxAnalyzer.UseVisualStyleBackColor = false;
             buttonSintaxAnalyzer.Click += buttonSintaxAnalyzer_Click;
             // 
@@ -147,12 +150,13 @@
             buttonBlackBox.FlatStyle = FlatStyle.Popup;
             buttonBlackBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             buttonBlackBox.ForeColor = Color.White;
-            buttonBlackBox.Location = new Point(268, 91);
+            buttonBlackBox.Location = new Point(73, 114);
             buttonBlackBox.Name = "buttonBlackBox";
             buttonBlackBox.Size = new Size(136, 43);
             buttonBlackBox.TabIndex = 7;
             buttonBlackBox.Text = "Caja Negra";
             buttonBlackBox.UseVisualStyleBackColor = false;
+            buttonBlackBox.Visible = false;
             buttonBlackBox.Click += buttonBlackBox_Click;
             // 
             // buttonWhiteBox
@@ -161,20 +165,44 @@
             buttonWhiteBox.FlatStyle = FlatStyle.Popup;
             buttonWhiteBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             buttonWhiteBox.ForeColor = Color.Black;
-            buttonWhiteBox.Location = new Point(882, 91);
+            buttonWhiteBox.Location = new Point(385, 114);
             buttonWhiteBox.Name = "buttonWhiteBox";
             buttonWhiteBox.Size = new Size(136, 43);
             buttonWhiteBox.TabIndex = 8;
             buttonWhiteBox.Text = "Caja Blanca";
             buttonWhiteBox.UseVisualStyleBackColor = false;
+            buttonWhiteBox.Visible = false;
             buttonWhiteBox.Click += buttonWhiteBox_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(681, 473);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(550, 250);
+            textBox1.TabIndex = 9;
+            // 
+            // buttonSemanticAnalyzer
+            // 
+            buttonSemanticAnalyzer.BackColor = Color.FromArgb(239, 71, 111);
+            buttonSemanticAnalyzer.FlatStyle = FlatStyle.Popup;
+            buttonSemanticAnalyzer.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonSemanticAnalyzer.Location = new Point(866, 397);
+            buttonSemanticAnalyzer.Name = "buttonSemanticAnalyzer";
+            buttonSemanticAnalyzer.Size = new Size(180, 70);
+            buttonSemanticAnalyzer.TabIndex = 10;
+            buttonSemanticAnalyzer.Text = "Análisis Semántico";
+            buttonSemanticAnalyzer.UseVisualStyleBackColor = false;
+            buttonSemanticAnalyzer.Click += buttonSemanticAnalyzer_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(7, 59, 76);
-            ClientSize = new Size(1282, 735);
+            ClientSize = new Size(1257, 735);
+            Controls.Add(buttonSemanticAnalyzer);
+            Controls.Add(textBox1);
             Controls.Add(buttonWhiteBox);
             Controls.Add(buttonBlackBox);
             Controls.Add(buttonSintaxAnalyzer);
@@ -204,5 +232,7 @@
         private Button buttonSintaxAnalyzer;
         private Button buttonBlackBox;
         private Button buttonWhiteBox;
+        private TextBox textBox1;
+        private Button buttonSemanticAnalyzer;
     }
 }
