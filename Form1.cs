@@ -6,12 +6,14 @@ namespace compiler
     public partial class Form1 : Form
     {
         private List<List<LexicalComponent>> lexicalComponents;
+        private List<SemanticSymbol> symbolsTable;
 
         public Form1()
         {
             InitializeComponent();
 
             lexicalComponents = new List<List<LexicalComponent>>();
+            symbolsTable = new List<SemanticSymbol>();
         }
 
         private void buttonLexicalAnalyzer_Click(object sender, EventArgs e)
@@ -56,9 +58,15 @@ namespace compiler
 
         private void buttonSemanticAnalyzer_Click(object sender, EventArgs e)
         {
+            listViewSymbolsTable.Items.Clear();
+            symbolsTable.Clear();
 
+            foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
+                    Analyzers.SemanticAnalyze(lineComponentes, symbolsTable);
+
+            for (int i = 0; i < symbolsTable.Count; i++)
+                listViewSymbolsTable.Items.Add(new ListViewItem(new String[] { symbolsTable[i].Symbol, symbolsTable[i].Status }));
         }
-
         private void buttonBlackBox_Click(object sender, EventArgs e)
         {
             string[] lines = new string[4];

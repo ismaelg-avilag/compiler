@@ -207,6 +207,14 @@ namespace compiler
             return isValid;
         }
 
+        public static void SemanticAnalyze(List<LexicalComponent> elements, List<SemanticSymbol> symbolsTable)
+        {
+            for(int i = 0; i < elements.Count; i++) {
+                if (elements[i].Number == (int)Grammar.Identifier && elements[i+1].Number == (int)Grammar.AssignmentOperator)
+                    symbolsTable.Add(new SemanticSymbol(elements[i].Lexeme, "Se declaró la variable " + elements[i].Lexeme));
+            }
+        }
+
 
     }
 }

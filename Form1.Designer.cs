@@ -40,8 +40,10 @@
             buttonSintaxAnalyzer = new Button();
             buttonBlackBox = new Button();
             buttonWhiteBox = new Button();
-            textBox1 = new TextBox();
             buttonSemanticAnalyzer = new Button();
+            listViewSymbolsTable = new ListView();
+            columnHeader5 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -174,14 +176,6 @@
             buttonWhiteBox.Visible = false;
             buttonWhiteBox.Click += buttonWhiteBox_Click;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(681, 473);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(550, 250);
-            textBox1.TabIndex = 9;
-            // 
             // buttonSemanticAnalyzer
             // 
             buttonSemanticAnalyzer.BackColor = Color.FromArgb(239, 71, 111);
@@ -195,14 +189,34 @@
             buttonSemanticAnalyzer.UseVisualStyleBackColor = false;
             buttonSemanticAnalyzer.Click += buttonSemanticAnalyzer_Click;
             // 
+            // listViewSymbolsTable
+            // 
+            listViewSymbolsTable.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5 });
+            listViewSymbolsTable.Location = new Point(681, 473);
+            listViewSymbolsTable.Name = "listViewSymbolsTable";
+            listViewSymbolsTable.Size = new Size(550, 250);
+            listViewSymbolsTable.TabIndex = 11;
+            listViewSymbolsTable.UseCompatibleStateImageBehavior = false;
+            listViewSymbolsTable.View = View.Details;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Estatus";
+            columnHeader5.Width = 350;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Variable";
+            columnHeader4.Width = 200;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(7, 59, 76);
             ClientSize = new Size(1257, 735);
+            Controls.Add(listViewSymbolsTable);
             Controls.Add(buttonSemanticAnalyzer);
-            Controls.Add(textBox1);
             Controls.Add(buttonWhiteBox);
             Controls.Add(buttonBlackBox);
             Controls.Add(buttonSintaxAnalyzer);
@@ -232,7 +246,10 @@
         private Button buttonSintaxAnalyzer;
         private Button buttonBlackBox;
         private Button buttonWhiteBox;
-        private TextBox textBox1;
         private Button buttonSemanticAnalyzer;
+        private ListView listViewSymbolsTable;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
     }
 }
