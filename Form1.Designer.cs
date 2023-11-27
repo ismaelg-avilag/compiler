@@ -42,10 +42,9 @@
             buttonWhiteBox = new Button();
             buttonSemanticAnalyzer = new Button();
             listViewSymbolsTable = new ListView();
+            columnHeader5 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            textBoxGeneratedASM = new TextBox();
-            button1 = new Button();
             SuspendLayout();
             // 
             // buttonLexicalAnalyzer
@@ -157,8 +156,7 @@
             buttonBlackBox.FlatStyle = FlatStyle.Popup;
             buttonBlackBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             buttonBlackBox.ForeColor = Color.White;
-            buttonBlackBox.Location = new Point(64, 86);
-            buttonBlackBox.Margin = new Padding(3, 2, 3, 2);
+            buttonBlackBox.Location = new Point(73, 114);
             buttonBlackBox.Name = "buttonBlackBox";
             buttonBlackBox.Size = new Size(119, 32);
             buttonBlackBox.TabIndex = 7;
@@ -218,44 +216,17 @@
             columnHeader5.Text = "Estatus";
             columnHeader5.Width = 350;
             // 
-            // textBoxGeneratedASM
+            // columnHeader4
             // 
-            textBoxGeneratedASM.BackColor = Color.FromArgb(35, 39, 46);
-            textBoxGeneratedASM.BorderStyle = BorderStyle.None;
-            textBoxGeneratedASM.Cursor = Cursors.No;
-            textBoxGeneratedASM.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxGeneratedASM.ForeColor = Color.FromArgb(97, 175, 239);
-            textBoxGeneratedASM.Location = new Point(1128, 124);
-            textBoxGeneratedASM.Margin = new Padding(9, 8, 9, 8);
-            textBoxGeneratedASM.Multiline = true;
-            textBoxGeneratedASM.Name = "textBoxGeneratedASM";
-            textBoxGeneratedASM.ReadOnly = true;
-            textBoxGeneratedASM.Size = new Size(228, 419);
-            textBoxGeneratedASM.TabIndex = 12;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(255, 128, 255);
-            button1.Cursor = Cursors.Hand;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(1166, 68);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(158, 52);
-            button1.TabIndex = 13;
-            button1.Text = "Generar ASM";
-            button1.UseVisualStyleBackColor = false;
+            columnHeader4.Text = "Variable";
+            columnHeader4.Width = 200;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(7, 59, 76);
-            ClientSize = new Size(1380, 551);
-            Controls.Add(button1);
-            Controls.Add(textBoxGeneratedASM);
+            ClientSize = new Size(1257, 735);
             Controls.Add(listViewSymbolsTable);
             Controls.Add(buttonSemanticAnalyzer);
             Controls.Add(buttonWhiteBox);
