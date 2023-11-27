@@ -65,7 +65,7 @@ namespace compiler
             variablesStatus.Clear();
 
             foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
-                    Analyzers.SemanticAnalyze(lineComponentes, variables, variablesStatus);
+                Analyzers.SemanticAnalyze(lineComponentes, variables, variablesStatus);
 
             for (int i = 0; i < variables.Count; i++)
                 listViewSymbolsTable.Items.Add(new ListViewItem(new String[] { variables[i], variablesStatus[i] }));
@@ -96,5 +96,20 @@ namespace compiler
             textBoxInput.Lines = lines;
         }
 
+        private void buttonGenerate_Click(object sender, EventArgs e)
+        {
+
+            foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
+            {
+                List<AsmInstruction> asmInstructions = Generator.Generate(lineComponentes);
+
+                foreach (AsmInstruction instruction in asmInstructions)
+                {
+
+                    textBoxGeneratedASM.AppendText(instruction.ToString() + Environment.NewLine);
+                }
+
+            }
+        }
     }
 }
