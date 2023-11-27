@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -205,6 +205,28 @@ namespace compiler
             }
 
             return isValid;
+        }
+
+        public static void SemanticAnalyze(List<LexicalComponent> elements, List<string> variables, List<string>variablesStatus)
+        {
+            for (int i = 0; i < elements.Count; i++)
+                if (elements[i].Number == (int)Grammar.Identifier) {
+                    if (elements[i + 1].Number == (int)Grammar.AssignmentOperator) { // asignacion
+                        if (variables.Contains(elements[i].Lexeme)) {// ya se agrego la variable
+                            variables.Add(elements[i].Lexeme);
+                            variablesStatus.Add("La variable " + elements[i].Lexeme + " se está usando pero no se declaró");
+                        }
+                        else {
+                            variables.Add(elements[i].Lexeme);
+                            variablesStatus.Add("Se declaró la variable " + elements[i].Lexeme);
+                        }
+                    }
+                    else if (!variables.Contains(elements[i].Lexeme)) { // se está usando una variable en una operacion
+                        variables.Add(elements[i].Lexeme);
+                        variablesStatus.Add("La variable " + elements[i].Lexeme + " se está usando pero no se declaró");
+                    }
+
+                }
         }
 
 

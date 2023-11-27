@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="SyntaxAnalyzeAuxFiles\" />
+    <Compile Remove="SyntaxAnalyzeAuxFiles\**" />
+    <EmbeddedResource Remove="SyntaxAnalyzeAuxFiles\**" />
+    <None Remove="SyntaxAnalyzeAuxFiles\**" />
   </ItemGroup>
 
 </Project>
