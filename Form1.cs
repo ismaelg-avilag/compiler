@@ -70,35 +70,9 @@ namespace compiler
             for (int i = 0; i < variables.Count; i++)
                 listViewSymbolsTable.Items.Add(new ListViewItem(new String[] { variables[i], variablesStatus[i] }));
         }
-        private void buttonBlackBox_Click(object sender, EventArgs e)
+
+        private void buttonGenerateAsmCode_Click(object sender, EventArgs e)
         {
-            string[] lines = new string[4];
-
-            lines[0] = "int a 0;";
-            lines[1] = "int a =;";
-            lines[2] = "if else";
-            lines[3] = "int a = 0";
-
-            textBoxInput.Text = "";
-            textBoxInput.Lines = lines;
-        }
-
-        private void buttonWhiteBox_Click(object sender, EventArgs e)
-        {
-            string[] lines = new string[4];
-
-            lines[0] = "int a = 0;";
-            lines[1] = "float area;";
-            lines[2] = "b = 0.001";
-            lines[3] = "while(1)";
-
-            textBoxInput.Text = "";
-            textBoxInput.Lines = lines;
-        }
-
-        private void buttonGenerate_Click(object sender, EventArgs e)
-        {
-
             foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
             {
                 List<AsmInstruction> asmInstructions = Generator.Generate(lineComponentes);
