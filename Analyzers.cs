@@ -52,7 +52,7 @@ namespace compiler
                             state = 2;
                             lexeme += line[i];
 
-                            if (!Char.IsDigit(line[i + 1]) || line[i] != '.') {
+                            if (!Char.IsDigit(line[i + 1]) && line[i] != '.') {
                                 elements.Add(new LexicalComponent(lexeme, Grammar.Number.ToString(), (int)Grammar.Number));
                                 state = 0; lexeme = "";
                             }
