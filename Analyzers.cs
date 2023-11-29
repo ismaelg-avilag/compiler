@@ -20,7 +20,9 @@ namespace compiler
             DollarSing = 3,
             AssignmentOperator = 4,
             AdditionOperator = 5,
+            SubstractionOperator = 6,
             MultiplicationOperator = 6,
+            DivisionOperator = 7,
         }
 
 
@@ -71,17 +73,27 @@ namespace compiler
 
                             state = 0; lexeme = "";
                         }
-                        else if (line[i] == '+' || line[i] == '-') {
+                        else if (line[i] == '+') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.AdditionOperator.ToString(), (int)Grammar.AdditionOperator));
                             state = 0; lexeme = "";
                         }
-                        else if (line[i] == '*' || line[i] == '/') {
+                        else if (line[i] == '-') {
+                            lexeme += line[i];
+                            elements.Add(new LexicalComponent(lexeme, Grammar.SubstractionOperator.ToString(), (int)Grammar.SubstractionOperator));
+                            state = 0; lexeme = "";
+                        }
+                        else if (line[i] == '*') {
                             lexeme += line[i];
                             elements.Add(new LexicalComponent(lexeme, Grammar.MultiplicationOperator.ToString(), (int)Grammar.MultiplicationOperator));
                             state = 0; lexeme = "";
                         }
-                    break;
+                        else if (line[i] == '/') {
+                            lexeme += line[i];
+                            elements.Add(new LexicalComponent(lexeme, Grammar.DivisionOperator.ToString(), (int)Grammar.DivisionOperator));
+                            state = 0; lexeme = "";
+                        }
+                        break;
 
                     case 1:
                         if (Char.IsDigit(line[i]) || Char.IsLetter(line[i]) || line[i] == '_') {
