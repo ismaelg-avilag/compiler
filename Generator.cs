@@ -33,31 +33,63 @@ namespace compiler
 
             for (int i = 0; i < elements.Count; i++) {
                 if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AssignmentOperator") {
-                    asmInstructions.Add(new AsmInstruction("MOV", elements[i].Lexeme, elements[i + 2].Lexeme));
+                    string destination = elements[i].Lexeme;
+
+                    // Handle the right-hand side of the assignment
+                    if (elements[i + 2].Token == "Number") {
+                        // Asignación de número
+                        asmInstructions.Add(new AsmInstruction("MOV", destination, elements[i + 2].Lexeme));
+
+                    }
+                    else if (elements[i + 2].Token == "Identifier") {
+                        // Asignación de identificador
+                        asmInstructions.Add(new AsmInstruction("MOV", destination, elements[i + 2].Lexeme));
+
+                    }
+                    else if (elements[i + 2].Token == "AdditionOperator" || 
+                               elements[i + 2].Token == "SubstractionOperator" ||
+                               elements[i + 2].Token == "MultiplicationOperator" ||
+                               elements[i + 2].Token == "DivisionOperator") {
+                        // Asignación con operación
+                        string tempReg = "EAX";  // Puedes usar otro registro temporal si es necesario
+                        asmInstructions.Add(new AsmInstruction("MOV", tempReg, elements[i + 2].Lexeme));
+                        asmInstructions.Add(new AsmInstruction("MOV", destination, tempReg));
+                    }
                     i += 2;
                 }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AdditionOperator") {
-                    asmInstructions.Add(new AsmInstruction("ADD", elements[i].Lexeme, elements[i + 2].Lexeme));
-                    i += 2;
-                }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "SubstractionOperator") {
-                    asmInstructions.Add(new AsmInstruction("SUB", elements[i].Lexeme, elements[i + 2].Lexeme));
-                    i += 2;
-                }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "MultiplicationOperator") {
-                    asmInstructions.Add(new AsmInstruction("MUL", elements[i].Lexeme, elements[i + 2].Lexeme));
-                    i += 2;
-                }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "DivisionOperator") {
-                    asmInstructions.Add(new AsmInstruction("DIV", elements[i].Lexeme, elements[i + 2].Lexeme));
-                    i += 2;
-                }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "Semicolon") {
-                    asmInstructions.Add(new AsmInstruction("PUSH", elements[i].Lexeme));
-                    asmInstructions.Add(new AsmInstruction("POP", "EAX"));
-                    i += 1;
+                else if (elements[i].Token == "AdditionOperator" ||
+                         elements[i].Token == "SubstractionOperator" ||
+                         elements[i].Token == "MultiplicationOperator" ||
+                         elements[i].Token == "DivisionOperator") {
+
+
+                    // Operaciones aritméticas
+                    string destination = elements[i - 1].Lexeme;
+                    string tempReg = "EAX";  // Puedes usar otro registro temporal si es necesario
+
+                    if (elements[i + 1].Token == "Number" || elements[i + 1].Token == "Identifier") {
+                        asmInstructions.Add(new AsmInstruction("MOV", tempReg, elements[i + 1].Lexeme));
+                        // Generar la instrucción de la operación correspondiente
+                        switch (elements[i].Token) {
+                            case "AdditionOperator":
+                                asmInstructions.Add(new AsmInstruction("ADD", destination, tempReg));
+                                break;
+                            case "SubstractionOperator":
+                                asmInstructions.Add(new AsmInstruction("SUB", destination, tempReg));
+                                break;
+                            case "MultiplicationOperator":
+                                asmInstructions.Add(new AsmInstruction("MUL", destination, tempReg));
+                                break;
+                            case "DivisionOperator":
+                                asmInstructions.Add(new AsmInstruction("DIV", tempReg));
+                                asmInstructions.Add(new AsmInstruction("MOV", destination, "EAX"));
+                                break;
+                        }
+                        i += 1;
+                    }
                 }
             }
+
 
             return asmInstructions;
         }
