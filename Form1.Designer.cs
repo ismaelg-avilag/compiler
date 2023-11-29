@@ -42,7 +42,7 @@
             listViewSymbolsTable = new ListView();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            textBox2 = new TextBox();
+            textBoxGeneratedASM = new TextBox();
             buttonGenerateAsmCode = new Button();
             SuspendLayout();
             // 
@@ -179,13 +179,14 @@
             columnHeader5.Text = "Estatus";
             columnHeader5.Width = 350;
             // 
-            // textBox2
+            // textBoxGeneratedASM
             // 
-            textBox2.Location = new Point(1209, 502);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(550, 247);
-            textBox2.TabIndex = 12;
+            textBoxGeneratedASM.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxGeneratedASM.Location = new Point(1209, 502);
+            textBoxGeneratedASM.Multiline = true;
+            textBoxGeneratedASM.Name = "textBoxGeneratedASM";
+            textBoxGeneratedASM.Size = new Size(550, 247);
+            textBoxGeneratedASM.TabIndex = 12;
             // 
             // buttonGenerateAsmCode
             // 
@@ -208,7 +209,7 @@
             BackColor = Color.FromArgb(7, 59, 76);
             ClientSize = new Size(1771, 761);
             Controls.Add(buttonGenerateAsmCode);
-            Controls.Add(textBox2);
+            Controls.Add(textBoxGeneratedASM);
             Controls.Add(listViewSymbolsTable);
             Controls.Add(buttonSemanticAnalyzer);
             Controls.Add(buttonSintaxAnalyzer);

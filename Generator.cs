@@ -27,31 +27,34 @@ namespace compiler
 
     internal class Generator
     {
-        public static List<AsmInstruction> Generate(List<LexicalComponent> elements)
+        public static List<AsmInstruction> GenerateAsm(List<LexicalComponent> elements)
         {
             List<AsmInstruction> asmInstructions = new List<AsmInstruction>();
 
-            for (int i = 0; i < elements.Count; i++)
-            {
-                if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AssignmentOperator")
-                {
-                    asmInstructions.Add(new AsmInstruction("mov", elements[i].Lexeme, elements[i + 2].Lexeme));
+            for (int i = 0; i < elements.Count; i++) {
+                if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AssignmentOperator") {
+                    asmInstructions.Add(new AsmInstruction("MOV", elements[i].Lexeme, elements[i + 2].Lexeme));
                     i += 2;
                 }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AdditionOperator")
-                {
-                    asmInstructions.Add(new AsmInstruction("add", elements[i].Lexeme, elements[i + 2].Lexeme));
+                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "AdditionOperator") {
+                    asmInstructions.Add(new AsmInstruction("ADD", elements[i].Lexeme, elements[i + 2].Lexeme));
                     i += 2;
                 }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "MultiplicationOperator")
-                {
-                    asmInstructions.Add(new AsmInstruction("mul", elements[i].Lexeme, elements[i + 2].Lexeme));
+                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "SubstractionOperator") {
+                    asmInstructions.Add(new AsmInstruction("SUB", elements[i].Lexeme, elements[i + 2].Lexeme));
                     i += 2;
                 }
-                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "Semicolon")
-                {
-                    asmInstructions.Add(new AsmInstruction("push", elements[i].Lexeme));
-                    asmInstructions.Add(new AsmInstruction("pop", "eax"));
+                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "MultiplicationOperator") {
+                    asmInstructions.Add(new AsmInstruction("MUL", elements[i].Lexeme, elements[i + 2].Lexeme));
+                    i += 2;
+                }
+                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "DivisionOperator") {
+                    asmInstructions.Add(new AsmInstruction("DIV", elements[i].Lexeme, elements[i + 2].Lexeme));
+                    i += 2;
+                }
+                else if (elements[i].Token == "Identifier" && elements[i + 1].Token == "Semicolon") {
+                    asmInstructions.Add(new AsmInstruction("PUSH", elements[i].Lexeme));
+                    asmInstructions.Add(new AsmInstruction("POP", "EAX"));
                     i += 1;
                 }
             }

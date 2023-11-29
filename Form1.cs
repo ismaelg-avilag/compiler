@@ -73,17 +73,20 @@ namespace compiler
 
         private void buttonGenerateAsmCode_Click(object sender, EventArgs e)
         {
+            textBoxGeneratedASM.Clear();
+
+            textBoxGeneratedASM.AppendText(".MODEL SMALL" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".STACK" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".DATA" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".CODE" + Environment.NewLine + Environment.NewLine);
+
+            textBoxGeneratedASM.AppendText("MAIN:" + Environment.NewLine + Environment.NewLine);
+
             foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
-            {
-                List<AsmInstruction> asmInstructions = Generator.Generate(lineComponentes);
-
-                foreach (AsmInstruction instruction in asmInstructions)
-                {
-
+                foreach (AsmInstruction instruction in Generator.GenerateAsm(lineComponentes))
                     textBoxGeneratedASM.AppendText(instruction.ToString() + Environment.NewLine);
-                }
 
-            }
+            textBoxGeneratedASM.AppendText(Environment.NewLine + "END MAIN");
         }
     }
 }
