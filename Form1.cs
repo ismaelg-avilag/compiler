@@ -65,36 +65,28 @@ namespace compiler
             variablesStatus.Clear();
 
             foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
-                    Analyzers.SemanticAnalyze(lineComponentes, variables, variablesStatus);
+                Analyzers.SemanticAnalyze(lineComponentes, variables, variablesStatus);
 
             for (int i = 0; i < variables.Count; i++)
                 listViewSymbolsTable.Items.Add(new ListViewItem(new String[] { variables[i], variablesStatus[i] }));
         }
-        private void buttonBlackBox_Click(object sender, EventArgs e)
+
+        private void buttonGenerateAsmCode_Click(object sender, EventArgs e)
         {
-            string[] lines = new string[4];
+            textBoxGeneratedASM.Clear();
 
-            lines[0] = "int a 0;";
-            lines[1] = "int a =;";
-            lines[2] = "if else";
-            lines[3] = "int a = 0";
+            textBoxGeneratedASM.AppendText(".MODEL SMALL" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".STACK" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".DATA" + Environment.NewLine);
+            textBoxGeneratedASM.AppendText(".CODE" + Environment.NewLine + Environment.NewLine);
 
-            textBoxInput.Text = "";
-            textBoxInput.Lines = lines;
+            textBoxGeneratedASM.AppendText("MAIN:" + Environment.NewLine + Environment.NewLine);
+
+            foreach (List<LexicalComponent> lineComponentes in lexicalComponents)
+                foreach (AsmInstruction instruction in Generator.GenerateAsm(lineComponentes))
+                    textBoxGeneratedASM.AppendText(instruction.ToString() + Environment.NewLine);
+
+            textBoxGeneratedASM.AppendText(Environment.NewLine + "END MAIN");
         }
-
-        private void buttonWhiteBox_Click(object sender, EventArgs e)
-        {
-            string[] lines = new string[4];
-
-            lines[0] = "int a = 0;";
-            lines[1] = "float area;";
-            lines[2] = "b = 0.001";
-            lines[3] = "while(1)";
-
-            textBoxInput.Text = "";
-            textBoxInput.Lines = lines;
-        }
-
     }
 }
